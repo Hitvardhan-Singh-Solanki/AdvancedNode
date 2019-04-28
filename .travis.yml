@@ -18,3 +18,10 @@ script:
   - nohup npm run start &
   - sleep 3 
   - npm run test
+# allow headful tests
+before_install:
+  # Enable user namespace cloning
+  - "sysctl kernel.unprivileged_userns_clone=1"
+  # Launch XVFB
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
